@@ -12,8 +12,12 @@ local TweenService = game:GetService("TweenService")
     end
 end
 
+
+
+-- Core
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/AirHub/main/Modules/Aimbot.lua"))()
 -- Config
-local Aimbot, WallHack = getgenv().AirHub.Aimbot, getgenv().AirHub.WallHack
+local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)() -- Pepsi's UI Library
 local Parts, Fonts, TracersType = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"}, {"UI", "System", "Plex", "Monospace"}, {"Bottom", "Center", "Mouse"}
 local Aimbot = true
 local AimbotEnabled = true
@@ -30,7 +34,7 @@ local FOVColor = Color3.fromRGB(0, 255, 0)
 Library.UnloadCallback = function()
 	Aimbot.Functions:Exit()
 	WallHack.Functions:Exit()
-	getgenv().AirHub = nil
+	getgenv().Rayfield = nil
 end
 
 -- FOV Circle
@@ -105,7 +109,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 
-local Section = Window:CreateSection("Main", 4483362458) -- Title, Image
+local Section = Tab:CreateSection("Main", 4483362458) -- Title, Image
 
 
 Rayfield:Notify({
@@ -129,10 +133,11 @@ local Toggle = MainTab:CreateToggle({
     CurrentValue = false,
     Callback = function(bool)
     Aimbot.Settings.Toggle = New
-    end
-}).Default = Aimbot.Settings.Toggle
+	end
+  })
+  Default = Aimbot.Settings.Toggle
 
-local Aimbot.Settings.LockPart = Parts[1]; Values:AddDropdown({
+Aimbot.Settings.LockPart = Parts[1]; Values:AddDropdown({
 	Name = "Lock Part",
 	Value = Parts[1],
 	Callback = function(New, Old)
@@ -140,14 +145,7 @@ local Aimbot.Settings.LockPart = Parts[1]; Values:AddDropdown({
 	end,
 	List = Parts,
 	Nothing = "Head"
-    AimbotEnabled = (value)
-	Aimbot = (value)
-     getgenv().Bo = bool
-     if bool then
-         doBo()
-     end
-    end,
- })
+}).Default = Parts[1]
  
  
  
@@ -199,7 +197,7 @@ local Toggle = MainTab:CreateSlider({
 	end
 })
 
-local Section1 = Window:CreateSection("Visual", 4483362458) -- Title, Image
+local Section1 = Tab:CreateSection("Visual", 4483362458) -- Title, Image
 
 
 local Toggle = MainTab:CreateToggle({
@@ -458,7 +456,7 @@ end
  })
  
  
- local Section2 = Window:CreateSection("Misc", 4483362458) -- Title, Image
+ local Section = Tab:CreateSection("Misc", 4483362458) -- Title, Image
 
 local Slider = MainTab:CreateSlider({
    Name = "WalkSpeed Slider",
