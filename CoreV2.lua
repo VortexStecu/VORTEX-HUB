@@ -83,7 +83,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 
 local Window = Rayfield:CreateWindow({
-   Name = "Loading..",
+   Name = "AimVortex Hub",
    LoadingTitle = "AimVortex Hub",
    LoadingSubtitle = "by VorStecu",
    ConfigurationSaving = {
@@ -109,7 +109,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 
-local Section = Tab:CreateSection("Main", 4483362458) -- Title, Image
+local MainTab = Window:CreateTab("Main", 4483362458)
 
 
 Rayfield:Notify({
@@ -197,7 +197,7 @@ local Toggle = MainTab:CreateSlider({
 	end
 })
 
-local Section1 = Tab:CreateSection("Visual", 4483362458) -- Title, Image
+local VisualTab = Window:CreateTab("Visual", 4483362458)
 
 
 local Toggle = MainTab:CreateToggle({
@@ -456,7 +456,7 @@ end
  })
  
  
- local Section = Tab:CreateSection("Misc", 4483362458) -- Title, Image
+local MiscTab = Window:CreateTab("Misc", 4483362458)
 
 local Slider = MainTab:CreateSlider({
    Name = "WalkSpeed Slider",
