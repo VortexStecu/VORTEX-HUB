@@ -457,19 +457,6 @@ task.spawn(function()
 	end
 end)
 
--- Function
-
-if AimbotEnabled then
-		local target = GetClosestTarget()
-		if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-			local head = target.Character.HumanoidRootPart.Position
-			local camPos = Camera.CFrame.Position
-			local newCF = CFrame.new(camPos, head)
-			Camera.CFrame = Camera.CFrame:Lerp(newCF, 0.4)
-		end
-	end
-end
-
 -- Local
 
 local AimbotEnabled = true
