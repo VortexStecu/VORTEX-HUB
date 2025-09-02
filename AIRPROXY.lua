@@ -12,7 +12,6 @@ local Window = Rayfield:CreateWindow({
 		FolderName = nil,
 		FileName = "Rivals Script"
 	},
-	KeySystem = false
 })
 
 local Config = {
