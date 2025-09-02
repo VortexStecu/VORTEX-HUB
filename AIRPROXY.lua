@@ -1090,6 +1090,6 @@ ImportantTab:CreateButton({
 			Camera.CFrame = Camera.CFrame:Lerp(newCF, 0.4)
 		end
 	end
-end)
+end
 
 Rayfield:LoadConfiguration()
