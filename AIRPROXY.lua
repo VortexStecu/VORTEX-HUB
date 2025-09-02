@@ -3,14 +3,6 @@ if game.PlaceId == 12137249458 then
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local AimbotEnabled = true
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
-local HttpService = game:GetService("HttpService")
-local TweenService = game:GetService("TweenService")
-
 local Window = Rayfield:CreateWindow({
 	Name = "RIVALS SCRIPT | MADE BY VORSTECU",
 	LoadingTitle = "Loading...",
@@ -452,6 +444,16 @@ task.spawn(function()
 		task.wait(0.21)
 	end
 end)
+
+-- Local
+
+local AimbotEnabled = true
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
 
 -- Smoke Logic
 
