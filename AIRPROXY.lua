@@ -1092,4 +1092,3 @@ ImportantTab:CreateButton({
 	end
 end
 
-Rayfield:LoadConfiguration()
