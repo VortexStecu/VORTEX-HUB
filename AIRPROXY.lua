@@ -8,10 +8,11 @@ local Window = Rayfield:CreateWindow({
 	LoadingTitle = "Loading...",
 	LoadingSubtitle = "SSSIIUUUUU",
 	ConfigurationSaving = {
-		Enabled = true,
+		Enabled = false,
 		FolderName = nil,
 		FileName = "Rivals Script"
 	},
+	KeySystem = false
 })
 
 local Config = {
