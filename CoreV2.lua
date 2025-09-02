@@ -32,10 +32,35 @@ local Aimbot = loadstring(game:HttpGet("https://raw.githubusercontent.com/Vortex
 -- Config
 local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)() -- Pepsi's UI Library
 local Parts = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"}, {"UI", "System", "Plex", "Monospace"}, {"Bottom", "Center", "Mouse"}
-local AimbotEnabled = true
+local AimbotEnabled = false
 local TeamCheck = true
 local WallCheck = true
+local FOVRadius = 100
+local ESPEnabled = false
+local ESPTeamCheck = true
+local HighlightColor = Color3.fromRGB(255, 0, 0)
+local FOVRainbow = false
+local FOVColor = Color3.fromRGB(0, 255, 0)
 
+-- FOV Circle
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ResetOnSpawn = false
+
+local FOVCircle = Instance.new("Frame")
+FOVCircle.Name = "FOV"
+FOVCircle.Parent = ScreenGui
+FOVCircle.AnchorPoint = Vector2.new(0.5, 0.5)
+FOVCircle.Position = UDim2.new(0.5, 0, 0.5, 0)
+FOVCircle.Size = UDim2.new(0, FOVRadius * 2, 0, FOVRadius * 2)
+FOVCircle.BackgroundTransparency = 1
+
+local UIStroke = Instance.new("UIStroke", FOVCircle)
+UIStroke.Thickness = 2
+UIStroke.Color = FOVColor
+
+local UICorner = Instance.new("UICorner", FOVCircle)
+UICorner.CornerRadius = UDim.new(1, 0)
 
 --// Cache
 
@@ -196,6 +221,8 @@ local Toggle = MainTab:CreateToggle({
     Name = "Aimbot",
     CurrentValue = false,
     Callback = function(bool)
+    AimbotEnabled = value
+    FOVCircle.Visible = value
     AimbotEnabled = (value)
     Aimbot = (value)
     LockParts = {"head"}
