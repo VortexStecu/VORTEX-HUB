@@ -8,29 +8,6 @@ local Camera = workspace.CurrentCamera
 local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 
-
--- FPS y Ping Display
-local StatsLabel = Instance.new("TextLabel")
-StatsLabel.Parent = ScreenGui
-StatsLabel.Size = UDim2.new(0, 200, 0, 50)
-StatsLabel.Position = UDim2.new(1, -210, 0, 10)
-StatsLabel.BackgroundTransparency = 1
-StatsLabel.TextColor3 = Color3.new(1, 1, 1)
-StatsLabel.TextStrokeTransparency = 0
-StatsLabel.Font = Enum.Font.Code
-StatsLabel.TextSize = 18
-StatsLabel.TextXAlignment = Enum.TextXAlignment.Right
-
-local lastUpdate = tick()
-RunService.RenderStepped:Connect(function()
-	local fps = math.floor(1 / RunService.RenderStepped:Wait())
-	if tick() - lastUpdate >= 0.3 then
-		local ping = tonumber(string.match(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString(), "%d+")) or 0
-		StatsLabel.Text = "FPS: " .. fps .. " | Ping: " .. ping .. "ms"
-		lastUpdate = tick()
-	end
-end)
-
 local Window = Rayfield:CreateWindow({
 	Name = "RIVALS SCRIPT | MADE BY VORSTECU",
 	LoadingTitle = "Loading...",
