@@ -1,3 +1,6 @@
+if game.PlaceId == 17625359962 then
+if game.PlaceId == 12137249458 then
+
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local AimbotEnabled = true
