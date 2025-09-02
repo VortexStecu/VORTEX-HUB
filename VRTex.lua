@@ -1,37 +1,47 @@
--- ███████╗ ██████╗██████╗ ██╗██████╗ ████████╗███████╗██████╗ ███████╗██╗  ██╗██╗   ██╗██████╗ 
--- ██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝██╔════╝██╔══██╗██╔════╝██║  ██║██║   ██║██╔══██╗
--- ███████╗██║     ██████╔╝██║██████╔╝   ██║   █████╗  ██████╔╝███████╗███████║██║   ██║██████╔╝
--- ╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   ██╔══╝  ██╔══██╗╚════██║██╔══██║██║   ██║██╔══██╗
--- ███████║╚██████╗██║  ██║██║██║        ██║   ███████╗██║  ██║███████║██║  ██║╚██████╔╝██████╔╝
--- ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
-
--- Youtube: https://www.youtube.com/@ScriptersHub 
-
--- Rivals open source script with tons of features, such as:
--- Aimbot
--- ESP
--- WalkSpeed/JumpPower changer
--- Fly, Noclip, Infinite Jump
--- Flashbang effect remover
--- Smoke clouds remover
--- and lots of more!
-
--- If you take some parts of the script, at least credit them      
-
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local AimbotEnabled = true
+local AimFov = true
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
+
+
+-- FPS y Ping Display
+local StatsLabel = Instance.new("TextLabel")
+StatsLabel.Parent = ScreenGui
+StatsLabel.Size = UDim2.new(0, 200, 0, 50)
+StatsLabel.Position = UDim2.new(1, -210, 0, 10)
+StatsLabel.BackgroundTransparency = 1
+StatsLabel.TextColor3 = Color3.new(1, 1, 1)
+StatsLabel.TextStrokeTransparency = 0
+StatsLabel.Font = Enum.Font.Code
+StatsLabel.TextSize = 18
+StatsLabel.TextXAlignment = Enum.TextXAlignment.Right
+
+local lastUpdate = tick()
+RunService.RenderStepped:Connect(function()
+	local fps = math.floor(1 / RunService.RenderStepped:Wait())
+	if tick() - lastUpdate >= 0.3 then
+		local ping = tonumber(string.match(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString(), "%d+")) or 0
+		StatsLabel.Text = "FPS: " .. fps .. " | Ping: " .. ping .. "ms"
+		lastUpdate = tick()
+	end
+end)
+
 local Window = Rayfield:CreateWindow({
-	Name = "RIVALS SCRIPT | MADE BY ScriptersHub WITH ❤️",
-	LoadingTitle = "Loading it gng, just wait...",
-	LoadingSubtitle = "like really, it's just 2 seconds",
+	Name = "RIVALS SCRIPT | MADE BY VORSTECU",
+	LoadingTitle = "Loading...",
+	LoadingSubtitle = "SSSIIUUUUU",
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = nil,
 		FileName = "Rivals Script"
 	},
 })
-
--- Below is a config. Basically, default load values when you first time booted in the cheat.
 
 local Config = {
 	AimbotToggle = false,
@@ -59,6 +69,7 @@ local Config = {
 	FlySpeed = 100,
 	Crosshair = false,
 }
+
 
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -380,7 +391,6 @@ local function startLoopSpeed()
     end)
 end
 
-local function stopLoopSpeed()
     if HumanModCons.ws then HumanModCons.ws:Disconnect() end
     if HumanModCons.wsCA then HumanModCons.wsCA:Disconnect() end
 
@@ -486,6 +496,9 @@ local AimbotToggl = AimbotTab:CreateToggle({
 	Flag = "AimbotTrigger",
 	Callback = function(Value)
 		Config.AimbotToggle = Value
+		AimbotEnabled = Value
+		getClosestPlayerInFOV = Value
+		
 	end,
 })
 AimbotTab:CreateToggle({
@@ -868,6 +881,7 @@ local RemoveCrosshairToggle = MiscellaneousTab:CreateToggle({
 		end
 	end,
 })
+
 local RemoveSmokeCloudsToggle = MiscellaneousTab:CreateToggle({
 	Name = "Remove Smoke Clouds",
 	CurrentValue = Config.Smoke,
@@ -1084,5 +1098,16 @@ ImportantTab:CreateButton({
         LocalPlayer:Kick("You like... rage quited ig lol")
     end,
 })
+
+	if AimbotEnabled then
+		local target = GetClosestTarget()
+		if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+			local head = target.Character.HumanoidRootPart.Position
+			local camPos = Camera.CFrame.Position
+			local newCF = CFrame.new(camPos, head)
+			Camera.CFrame = Camera.CFrame:Lerp(newCF, 0.4)
+		end
+	end
+end)
 
 Rayfield:LoadConfiguration()
